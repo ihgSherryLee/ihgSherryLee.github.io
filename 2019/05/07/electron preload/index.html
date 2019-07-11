@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="electron,preload,">
 
 
 
@@ -79,17 +79,18 @@
 
 
 
-<meta name="description" content="electron preload 的用法在electron中，主进程和渲染进程进行通信，可以通过ipc模块发送和接收信息。 渲染器进程 123456789101112const ipc = require(&apos;electron&apos;).ipcRendererconst asyncMsgBtn = document.getElementById(&apos;async-msg&apos;)asyncMsgBtn.addEve">
+<meta name="description" content="在electron中，主进程和渲染进程进行通信，可以通过ipc模块发送和接收信息。 渲染器进程 123456789101112const ipc = require(&apos;electron&apos;).ipcRendererconst asyncMsgBtn = document.getElementById(&apos;async-msg&apos;)asyncMsgBtn.addEventListener(&apos;click&apos;,">
+<meta name="keywords" content="electron,preload">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Sherry&#39;s blog">
+<meta property="og:title" content="electron preload 的用法">
 <meta property="og:url" content="http://yoursite.com/2019/05/07/electron preload/index.html">
 <meta property="og:site_name" content="Sherry&#39;s blog">
-<meta property="og:description" content="electron preload 的用法在electron中，主进程和渲染进程进行通信，可以通过ipc模块发送和接收信息。 渲染器进程 123456789101112const ipc = require(&apos;electron&apos;).ipcRendererconst asyncMsgBtn = document.getElementById(&apos;async-msg&apos;)asyncMsgBtn.addEve">
+<meta property="og:description" content="在electron中，主进程和渲染进程进行通信，可以通过ipc模块发送和接收信息。 渲染器进程 123456789101112const ipc = require(&apos;electron&apos;).ipcRendererconst asyncMsgBtn = document.getElementById(&apos;async-msg&apos;)asyncMsgBtn.addEventListener(&apos;click&apos;,">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-05-07T00:01:06.531Z">
+<meta property="og:updated_time" content="2019-07-11T16:29:36.762Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Sherry&#39;s blog">
-<meta name="twitter:description" content="electron preload 的用法在electron中，主进程和渲染进程进行通信，可以通过ipc模块发送和接收信息。 渲染器进程 123456789101112const ipc = require(&apos;electron&apos;).ipcRendererconst asyncMsgBtn = document.getElementById(&apos;async-msg&apos;)asyncMsgBtn.addEve">
+<meta name="twitter:title" content="electron preload 的用法">
+<meta name="twitter:description" content="在electron中，主进程和渲染进程进行通信，可以通过ipc模块发送和接收信息。 渲染器进程 123456789101112const ipc = require(&apos;electron&apos;).ipcRendererconst asyncMsgBtn = document.getElementById(&apos;async-msg&apos;)asyncMsgBtn.addEventListener(&apos;click&apos;,">
 
 
 
@@ -125,7 +126,7 @@
 
 
 
-  <title> | Sherry's blog</title>
+  <title>electron preload 的用法 | Sherry's blog</title>
   
 
 
@@ -186,6 +187,16 @@
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
             
             首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
           </a>
         </li>
       
@@ -259,7 +270,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline"></h1>
+          <h1 class="post-title" itemprop="name headline">electron preload 的用法</h1>
         
 
         <div class="post-meta">
@@ -281,6 +292,28 @@
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/electron/" itemprop="url" rel="index">
+                    <span itemprop="name">electron</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -309,7 +342,7 @@
       
 
       
-        <h4 id="electron-preload-的用法"><a href="#electron-preload-的用法" class="headerlink" title="electron preload 的用法"></a>electron preload 的用法</h4><p>在electron中，主进程和渲染进程进行通信，可以通过ipc模块发送和接收信息。</p>
+        <p>在electron中，主进程和渲染进程进行通信，可以通过ipc模块发送和接收信息。</p>
 <p>渲染器进程</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> ipc = <span class="built_in">require</span>(<span class="string">'electron'</span>).ipcRenderer</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> asyncMsgBtn = <span class="built_in">document</span>.getElementById(<span class="string">'async-msg'</span>)</span><br><span class="line"></span><br><span class="line">asyncMsgBtn.addEventListener(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  ipc.send(<span class="string">'asynchronous-message'</span>, <span class="string">'ping'</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">ipc.on(<span class="string">'asynchronous-reply'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">event, arg</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> message = <span class="string">`异步消息回复: <span class="subst">$&#123;arg&#125;</span>`</span></span><br><span class="line">  <span class="built_in">document</span>.getElementById(<span class="string">'async-reply'</span>).innerHTML = message</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 <p>主进程</p>
@@ -333,6 +366,14 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/electron/" rel="tag"># electron</a>
+          
+            <a href="/tags/preload/" rel="tag"># preload</a>
+          
+        </div>
+      
 
       
       
@@ -352,8 +393,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/07/06/关于nrm的一些命令/" rel="prev" title>
-                 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/07/06/关于nrm的一些命令/" rel="prev" title="关于nrm的一些命令">
+                关于nrm的一些命令 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -406,17 +447,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -438,7 +470,25 @@
             
 
             
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
 
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
             
 
           </nav>
@@ -458,22 +508,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#electron-preload-的用法"><span class="nav-number">1.</span> <span class="nav-text">electron preload 的用法</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       

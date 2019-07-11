@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="electron,踩坑,">
 
 
 
@@ -80,16 +80,17 @@
 
 
 <meta name="description" content="在后续维护electron项目中想到：每次客户端有更新(即使改动不大),都要重新打包后把客户端发给供应商用户，虽随着用户越来越多，更新也越来越麻烦，花在沟通上的成本更大，所以考虑使用自动更新，减少沟通成本，让用户在没有察觉的情况下就能更新到最新版。  官方支持的方法是利用内置的Squirrel框架和Electron的autoUpdater模块。  但因为之前适用electron-builder工具">
+<meta name="keywords" content="electron,踩坑">
 <meta property="og:type" content="article">
-<meta property="og:title" content="electron采坑(二)">
+<meta property="og:title" content="electron踩坑(二)">
 <meta property="og:url" content="http://yoursite.com/2019/02/22/electron 自动更新/index.html">
 <meta property="og:site_name" content="Sherry&#39;s blog">
 <meta property="og:description" content="在后续维护electron项目中想到：每次客户端有更新(即使改动不大),都要重新打包后把客户端发给供应商用户，虽随着用户越来越多，更新也越来越麻烦，花在沟通上的成本更大，所以考虑使用自动更新，减少沟通成本，让用户在没有察觉的情况下就能更新到最新版。  官方支持的方法是利用内置的Squirrel框架和Electron的autoUpdater模块。  但因为之前适用electron-builder工具">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/Users/sherry/Library/Application%20Support/typora-user-images/image-20190304164623128.png">
-<meta property="og:updated_time" content="2019-03-05T03:57:30.597Z">
+<meta property="og:updated_time" content="2019-07-11T16:30:11.048Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="electron采坑(二)">
+<meta name="twitter:title" content="electron踩坑(二)">
 <meta name="twitter:description" content="在后续维护electron项目中想到：每次客户端有更新(即使改动不大),都要重新打包后把客户端发给供应商用户，虽随着用户越来越多，更新也越来越麻烦，花在沟通上的成本更大，所以考虑使用自动更新，减少沟通成本，让用户在没有察觉的情况下就能更新到最新版。  官方支持的方法是利用内置的Squirrel框架和Electron的autoUpdater模块。  但因为之前适用electron-builder工具">
 <meta name="twitter:image" content="http://yoursite.com/Users/sherry/Library/Application%20Support/typora-user-images/image-20190304164623128.png">
 
@@ -127,7 +128,7 @@
 
 
 
-  <title>electron采坑(二) | Sherry's blog</title>
+  <title>electron踩坑(二) | Sherry's blog</title>
   
 
 
@@ -188,6 +189,16 @@
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
             
             首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
           </a>
         </li>
       
@@ -261,7 +272,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">electron采坑(二)</h1>
+          <h1 class="post-title" itemprop="name headline">electron踩坑(二)</h1>
         
 
         <div class="post-meta">
@@ -283,6 +294,28 @@
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/electron/" itemprop="url" rel="index">
+                    <span itemprop="name">electron</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -368,6 +401,14 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/electron/" rel="tag"># electron</a>
+          
+            <a href="/tags/踩坑/" rel="tag"># 踩坑</a>
+          
+        </div>
+      
 
       
       
@@ -377,8 +418,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/02/14/electron/" rel="next" title="electron采坑(一)">
-                <i class="fa fa-chevron-left"></i> electron采坑(一)
+              <a href="/2019/02/14/electron/" rel="next" title="electron踩坑(一)">
+                <i class="fa fa-chevron-left"></i> electron踩坑(一)
               </a>
             
           </div>
@@ -387,8 +428,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/03/05/c-lodop打印问题/" rel="prev" title="c-lodop打印问题">
-                c-lodop打印问题 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/04/02/前端知识复习or面试点/" rel="prev" title="前端知识复习or面试点">
+                前端知识复习or面试点 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -464,7 +505,25 @@
             
 
             
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
 
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
             
 
           </nav>
