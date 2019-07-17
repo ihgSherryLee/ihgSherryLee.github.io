@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="electron,preload,">
+  <meta name="keywords" content="electron,踩坑,">
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="在electron中，主进程和渲染进程进行通信，可以通过ipc模块发送和接收信息。 渲染器进程 123456789101112const ipc = require(&apos;electron&apos;).ipcRendererconst asyncMsgBtn = document.getElementById(&apos;async-msg&apos;)asyncMsgBtn.addEventListener(&apos;click&apos;,">
-<meta name="keywords" content="electron,preload">
+<meta name="description" content="公司项目使用electron开发，  Electron是由Github开发，用HTML，CSS和JavaScript来构建跨平台桌面应用程序的一个开源库。 Electron通过将Chromium和Node.js合并到同一个运行时环境中，并将其打包为Mac，Windows和Linux系统下的应用。  使用electron将公司网站打包成应用，伪装成专业的bs客户端。 安装和入门在GitHub上都有">
+<meta name="keywords" content="electron,踩坑">
 <meta property="og:type" content="article">
-<meta property="og:title" content="electron preload 的用法">
-<meta property="og:url" content="http://ihgsherrylee.github.io/2019/05/07/electron preload/index.html">
+<meta property="og:title" content="electron踩坑(一)">
+<meta property="og:url" content="http://ihgsherrylee.github.io/posts/4d2accbc/index.html">
 <meta property="og:site_name" content="Sherry&#39;s blog">
-<meta property="og:description" content="在electron中，主进程和渲染进程进行通信，可以通过ipc模块发送和接收信息。 渲染器进程 123456789101112const ipc = require(&apos;electron&apos;).ipcRendererconst asyncMsgBtn = document.getElementById(&apos;async-msg&apos;)asyncMsgBtn.addEventListener(&apos;click&apos;,">
+<meta property="og:description" content="公司项目使用electron开发，  Electron是由Github开发，用HTML，CSS和JavaScript来构建跨平台桌面应用程序的一个开源库。 Electron通过将Chromium和Node.js合并到同一个运行时环境中，并将其打包为Mac，Windows和Linux系统下的应用。  使用electron将公司网站打包成应用，伪装成专业的bs客户端。 安装和入门在GitHub上都有">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-12T15:04:55.801Z">
+<meta property="og:updated_time" content="2019-07-12T15:04:44.755Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="electron preload 的用法">
-<meta name="twitter:description" content="在electron中，主进程和渲染进程进行通信，可以通过ipc模块发送和接收信息。 渲染器进程 123456789101112const ipc = require(&apos;electron&apos;).ipcRendererconst asyncMsgBtn = document.getElementById(&apos;async-msg&apos;)asyncMsgBtn.addEventListener(&apos;click&apos;,">
+<meta name="twitter:title" content="electron踩坑(一)">
+<meta name="twitter:description" content="公司项目使用electron开发，  Electron是由Github开发，用HTML，CSS和JavaScript来构建跨平台桌面应用程序的一个开源库。 Electron通过将Chromium和Node.js合并到同一个运行时环境中，并将其打包为Mac，Windows和Linux系统下的应用。  使用electron将公司网站打包成应用，伪装成专业的bs客户端。 安装和入门在GitHub上都有">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://ihgsherrylee.github.io/2019/05/07/electron preload/">
+  <link rel="canonical" href="http://ihgsherrylee.github.io/posts/4d2accbc/">
 
 
 
 
 
-  <title>electron preload 的用法 | Sherry's blog</title>
+  <title>electron踩坑(一) | Sherry's blog</title>
   
 
 
@@ -253,7 +253,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://ihgsherrylee.github.io/2019/05/07/electron preload/">
+    <link itemprop="mainEntityOfPage" href="http://ihgsherrylee.github.io/posts/4d2accbc/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Sherry Lee">
@@ -270,7 +270,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">electron preload 的用法</h2>
+          <h2 class="post-title" itemprop="name headline">electron踩坑(一)</h2>
         
 
         <div class="post-meta">
@@ -282,8 +282,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-07T07:47:42+08:00">
-                2019-05-07
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-14T20:40:03+08:00">
+                2019-02-14
               </time>
             
 
@@ -342,15 +342,40 @@
       
 
       
-        <p>在electron中，主进程和渲染进程进行通信，可以通过ipc模块发送和接收信息。</p>
-<p>渲染器进程</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> ipc = <span class="built_in">require</span>(<span class="string">'electron'</span>).ipcRenderer</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> asyncMsgBtn = <span class="built_in">document</span>.getElementById(<span class="string">'async-msg'</span>)</span><br><span class="line"></span><br><span class="line">asyncMsgBtn.addEventListener(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  ipc.send(<span class="string">'asynchronous-message'</span>, <span class="string">'ping'</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">ipc.on(<span class="string">'asynchronous-reply'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">event, arg</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> message = <span class="string">`异步消息回复: <span class="subst">$&#123;arg&#125;</span>`</span></span><br><span class="line">  <span class="built_in">document</span>.getElementById(<span class="string">'async-reply'</span>).innerHTML = message</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<p>主进程</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> ipc = <span class="built_in">require</span>(<span class="string">'electron'</span>).ipcMain</span><br><span class="line"></span><br><span class="line">ipc.on(<span class="string">'asynchronous-message'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">event, arg</span>) </span>&#123;</span><br><span class="line">  event.sender.send(<span class="string">'asynchronous-reply'</span>, <span class="string">'pong'</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<p>但是，一旦我们直接load一个网址，渲染的不是一个node运行时的html，而是一个webpack打包后的静态页面，我们不可能从网址的静态页面中往主进程发送消息或接受主进程的消息。这个时候，<strong>preload</strong>就排上用场了。</p>
+        <p>公司项目使用electron开发，</p>
 <blockquote>
-<p>Preload:在页面运行其他脚本之前预先加载指定的脚本 无论页面是否集成Node, 此脚本都可以访问所有Node API 脚本路径为文件的绝对路径。 当 node integration 关闭时, 预加载的脚本将从全局范围重新引入node的全局引用标志。</p>
+<p><a href="https://electronjs.org/" target="_blank" rel="noopener">Electron</a>是由Github开发，用HTML，CSS和JavaScript来构建跨平台桌面应用程序的一个开源库。 Electron通过将<a href="https://www.chromium.org/Home" target="_blank" rel="noopener">Chromium</a>和<a href="https://nodejs.org/" target="_blank" rel="noopener">Node.js</a>合并到同一个运行时环境中，并将其打包为Mac，Windows和Linux系统下的应用。</p>
 </blockquote>
+<p>使用electron将公司网站打包成应用，伪装成专业的bs客户端。</p>
+<p>安装和入门在<a href="https://github.com/electron/electron" target="_blank" rel="noopener">GitHub</a>上都有</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/electron/electron-quick-start</span><br><span class="line">cd electron-quick-start</span><br><span class="line">npm install</span><br><span class="line">npm start</span><br></pre></td></tr></table></figure>
+<p>clone之后修修改改就形成了现在的项目。</p>
+<h4 id="使用electron-builder打包成应用程序exe-dmg"><a href="#使用electron-builder打包成应用程序exe-dmg" class="headerlink" title="使用electron-builder打包成应用程序exe/dmg"></a>使用electron-builder打包成应用程序exe/dmg</h4><p>下载yarn</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn add electron-builder --dev</span><br></pre></td></tr></table></figure>
+<p>修改package.json，设置appId，使windows</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&quot;build&quot;: &#123;</span><br><span class="line">  &quot;appId&quot;: &quot;your.id&quot;,</span><br><span class="line">  &quot;mac&quot;: &#123;</span><br><span class="line">    &quot;category&quot;: &quot;your.app.category.type&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&quot;scripts&quot;: &#123;</span><br><span class="line">  &quot;pack&quot;: &quot;electron-builder --dir&quot;,</span><br><span class="line">  &quot;dist&quot;: &quot;electron-builder&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后打包就会在dist目录生成.exe(在windows打包)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn dist</span><br></pre></td></tr></table></figure>
+<p>具体的dist 参数可以参考 <a href="https://www.electron.build/cli" target="_blank" rel="noopener">https://www.electron.build/cli</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">electron-builder // 不指定平台和位数，默认会打当前打包程序所在平台的相应位数版本</span><br><span class="line">electron-builder --win --ia32 --x64 // 指定平台和位数，将32位和64位打成同一个安装包</span><br></pre></td></tr></table></figure>
+<p>若要分开打成两个包，需分别执行–ia和x64两次得到2个包:<a href="https://github.com/electron-userland/electron-builder/issues/3293" target="_blank" rel="noopener">Issue</a>，但因为两个安装包生成同一名字的latest.yml，会被覆盖，自动更新会替换后生成的安装包，不然就要将两个安装包和latest.yml放在不同文件夹下，保证自动更新正常。</p>
+<p>注!!!</p>
+<p>不要指望一个平台能打包全平台的安装包。</p>
+<blockquote>
+<p>Don’t expect that you can build app for all platforms on one platform.</p>
+<ul>
+<li><p>If your app has native dependency, it can be compiled only on the target platform unless <a href="https://www.npmjs.com/package/prebuild" target="_blank" rel="noopener">prebuild</a> is not used.</p>
+<p><a href="https://www.npmjs.com/package/prebuild" target="_blank" rel="noopener">prebuild</a> is a solution, but most node modules <a href="https://github.com/atom/node-keytar/issues/27" target="_blank" rel="noopener">don’t provide</a> prebuilt binaries.</p>
+</li>
+<li><p>macOS Code Signing works only on macOS. <a href="http://stackoverflow.com/a/12156576" target="_blank" rel="noopener">Cannot be fixed</a>.</p>
+</li>
+</ul>
+</blockquote>
+<p>注：</p>
+<ul>
+<li>Win 10 notification bug：这个项目一开始并不是打包成安装包后安装成桌面应用，而是打包成asar归档规格式，但因为后来网页需要使用通知notification，发现在win10的某一个版本16299.19里无法显示通知，但是有通知的声音播放，查阅相关文档后发现，这是win10的feature，必须使用有appId的安装包安装后才能显示通知(相关<a href="https://github.com/electron/electron/issues/10864" target="_blank" rel="noopener">issue</a>)。所以使用<a href="https://github.com/electron-userland/electron-builder" target="_blank" rel="noopener">electron-builder</a>打包成安装包.</li>
+<li>win 7 notification bug：在win7电脑上使用通知，若通知tag相同，则只会弹第一次，即使刷新了页面，也不好弹第二次，只有关闭应用程序后重开才会再次弹窗。<a href="https://github.com/electron/electron/issues/11189" target="_blank" rel="noopener">issue</a>。所有要将tag加个random，避免相同。</li>
+</ul>
 
       
     </div>
@@ -370,7 +395,7 @@
           
             <a href="/tags/electron/" rel="tag"># electron</a>
           
-            <a href="/tags/preload/" rel="tag"># preload</a>
+            <a href="/tags/踩坑/" rel="tag"># 踩坑</a>
           
         </div>
       
@@ -383,7 +408,7 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/04/02/你不知道的JavaScript(下)/" rel="next" title>
+              <a href="/posts/0/" rel="next" title>
                 <i class="fa fa-chevron-left"></i> 
               </a>
             
@@ -393,8 +418,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/07/06/关于nrm的一些命令/" rel="prev" title="关于nrm的一些命令">
-                关于nrm的一些命令 <i class="fa fa-chevron-right"></i>
+              <a href="/posts/e21b57de/" rel="prev" title="electron踩坑(二)">
+                electron踩坑(二) <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -447,8 +472,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -508,6 +542,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#使用electron-builder打包成应用程序exe-dmg"><span class="nav-number">1.</span> <span class="nav-text">使用electron-builder打包成应用程序exe/dmg</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

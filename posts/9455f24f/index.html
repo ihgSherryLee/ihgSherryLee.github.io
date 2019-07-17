@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="nrm,留存,">
 
 
 
@@ -79,17 +79,18 @@
 
 
 
-<meta name="description" content="你不知道的JavaScript(下) 2.4.1 对象属性赋值模式 12var &amp;#123;x:x, y:y, z:z&amp;#125; = objvar &amp;#123;x, y, z&amp;#125; = obj {x,…}是省略掉了x:部分还是:x部分？时间上是省略了x:部分">
+<meta name="description" content="nrm是什么：  12&amp;gt; nrm` can help you easy and fast switch between different npm registries, now include: `npm`, `cnpm`, `taobao`, `nj(nodejitsu)&amp;gt;  其实就是帮助快速切换npm镜像包，在没有安装之前，最常用的设置镜像的命令是： 1234567891011n">
+<meta name="keywords" content="nrm,留存">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Sherry&#39;s blog">
-<meta property="og:url" content="http://ihgsherrylee.github.io/2019/04/02/你不知道的JavaScript(下)/index.html">
+<meta property="og:title" content="关于nrm的一些命令">
+<meta property="og:url" content="http://ihgsherrylee.github.io/posts/9455f24f/index.html">
 <meta property="og:site_name" content="Sherry&#39;s blog">
-<meta property="og:description" content="你不知道的JavaScript(下) 2.4.1 对象属性赋值模式 12var &amp;#123;x:x, y:y, z:z&amp;#125; = objvar &amp;#123;x, y, z&amp;#125; = obj {x,…}是省略掉了x:部分还是:x部分？时间上是省略了x:部分">
+<meta property="og:description" content="nrm是什么：  12&amp;gt; nrm` can help you easy and fast switch between different npm registries, now include: `npm`, `cnpm`, `taobao`, `nj(nodejitsu)&amp;gt;  其实就是帮助快速切换npm镜像包，在没有安装之前，最常用的设置镜像的命令是： 1234567891011n">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-04-02T02:58:19.239Z">
+<meta property="og:updated_time" content="2019-07-12T15:05:22.308Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Sherry&#39;s blog">
-<meta name="twitter:description" content="你不知道的JavaScript(下) 2.4.1 对象属性赋值模式 12var &amp;#123;x:x, y:y, z:z&amp;#125; = objvar &amp;#123;x, y, z&amp;#125; = obj {x,…}是省略掉了x:部分还是:x部分？时间上是省略了x:部分">
+<meta name="twitter:title" content="关于nrm的一些命令">
+<meta name="twitter:description" content="nrm是什么：  12&amp;gt; nrm` can help you easy and fast switch between different npm registries, now include: `npm`, `cnpm`, `taobao`, `nj(nodejitsu)&amp;gt;  其实就是帮助快速切换npm镜像包，在没有安装之前，最常用的设置镜像的命令是： 1234567891011n">
 
 
 
@@ -119,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://ihgsherrylee.github.io/2019/04/02/你不知道的JavaScript(下)/">
+  <link rel="canonical" href="http://ihgsherrylee.github.io/posts/9455f24f/">
 
 
 
 
 
-  <title> | Sherry's blog</title>
+  <title>关于nrm的一些命令 | Sherry's blog</title>
   
 
 
@@ -252,7 +253,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://ihgsherrylee.github.io/2019/04/02/你不知道的JavaScript(下)/">
+    <link itemprop="mainEntityOfPage" href="http://ihgsherrylee.github.io/posts/9455f24f/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Sherry Lee">
@@ -269,7 +270,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline"></h2>
+          <h2 class="post-title" itemprop="name headline">关于nrm的一些命令</h2>
         
 
         <div class="post-meta">
@@ -281,8 +282,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-02T10:58:19+08:00">
-                2019-04-02
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-06T16:11:50+08:00">
+                2019-07-06
               </time>
             
 
@@ -291,6 +292,28 @@
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/nrm/" itemprop="url" rel="index">
+                    <span itemprop="name">nrm</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -319,10 +342,23 @@
       
 
       
-        <p>你不知道的JavaScript(下)</p>
-<p>2.4.1 对象属性赋值模式</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> &#123;<span class="attr">x</span>:x, <span class="attr">y</span>:y, <span class="attr">z</span>:z&#125; = obj</span><br><span class="line"><span class="keyword">var</span> &#123;x, y, z&#125; = obj</span><br></pre></td></tr></table></figure>
-<p>{x,…}是省略掉了x:部分还是:x部分？时间上是省略了x:部分</p>
+        <p>nrm是什么：</p>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; nrm` can help you easy and fast switch between different npm registries, now include: `npm`, `cnpm`, `taobao`, `nj(nodejitsu)</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>其实就是帮助快速切换npm镜像包，在没有安装之前，最常用的设置镜像的命令是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">npm set registry https://registry.npm.taobao.org/</span><br><span class="line"></span><br><span class="line">// 备忘 其余命令</span><br><span class="line">// 获取某项配置</span><br><span class="line">npm config get registry </span><br><span class="line"></span><br><span class="line">// 删除registry</span><br><span class="line">npm config delete registry</span><br><span class="line"></span><br><span class="line">// 直接编辑config</span><br><span class="line">npm config edit</span><br></pre></td></tr></table></figure>
+<p>如果需要经常切换镜像，每次都要set，如果有个工具帮你记住各种不同的镜像元，且能快速切换，是不是就很好呢？那nrm就是这样一个工具。</p>
+<p>安装：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g nrm</span><br></pre></td></tr></table></figure>
+<p>查看默认的镜像列表(*表示当前镜像地址)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">  npm ---- https://registry.npmjs.org/</span><br><span class="line">  cnpm --- http://r.cnpmjs.org/</span><br><span class="line">* taobao - https://registry.npm.taobao.org/</span><br><span class="line">  nj ----- https://registry.nodejitsu.com/</span><br><span class="line">  npmMirror  https://skimdb.npmjs.com/registry/</span><br><span class="line">  edunpm - http://registry.enpmjs.org/</span><br></pre></td></tr></table></figure>
+<p>直接use即可切换</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">nrm use cnpm</span><br><span class="line"></span><br><span class="line">Registry has been set to: http://r.cnpmjs.org/</span><br></pre></td></tr></table></figure>
+<p>增加镜像</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nrm add name url</span><br></pre></td></tr></table></figure>
+<p>删除镜像</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nrm del name</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -338,6 +374,14 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/nrm/" rel="tag"># nrm</a>
+          
+            <a href="/tags/留存/" rel="tag"># 留存</a>
+          
+        </div>
+      
 
       
       
@@ -347,8 +391,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/04/02/前端知识复习or面试点/" rel="next" title="前端知识复习or面试点">
-                <i class="fa fa-chevron-left"></i> 前端知识复习or面试点
+              <a href="/posts/39ed72a2/" rel="next" title="electron preload 的用法">
+                <i class="fa fa-chevron-left"></i> electron preload 的用法
               </a>
             
           </div>
@@ -357,8 +401,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/05/07/electron preload/" rel="prev" title="electron preload 的用法">
-                electron preload 的用法 <i class="fa fa-chevron-right"></i>
+              <a href="/posts/3b029d5e/" rel="prev" title="Vue技术揭秘之virtual dom">
+                Vue技术揭秘之virtual dom <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
