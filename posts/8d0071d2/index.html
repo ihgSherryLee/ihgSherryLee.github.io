@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="问题,总结,">
+  <meta name="keywords" content="git 多账号,git 提交历史,">
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="Vue cli build 遇到的问题使用vue-cli 3打包时，出现了问题： 123456789101112131415161718192021222324252627vue-cli-service build --mode dev/node_modules/_open@6.4.0@open/index.js:16const wslToWindowsPath = async path =&amp;gt">
-<meta name="keywords" content="问题,总结">
+<meta name="description" content="创建多个git账号&amp;amp;修改git提交历史因公司使用gitlab，账号为公司邮箱，自己也有个GitHub，账号为私人邮箱，要怎么做才能使用不同的账号push不同的仓库呢？ 生成不同的ssh key: 1ssh-keygen -t rsa -f ~/.ssh/id_rsa_github -C &amp;quot;email@email.com&amp;quot; 我把公司的命名为id_rsa，github的加了">
+<meta name="keywords" content="git 多账号,git 提交历史">
 <meta property="og:type" content="article">
-<meta property="og:title" content="QA-node-version">
-<meta property="og:url" content="http://ihgsherrylee.github.io/posts/44e1c702/index.html">
+<meta property="og:title" content="multi-git-account">
+<meta property="og:url" content="http://ihgsherrylee.github.io/posts/8d0071d2/index.html">
 <meta property="og:site_name" content="Sherry&#39;s blog">
-<meta property="og:description" content="Vue cli build 遇到的问题使用vue-cli 3打包时，出现了问题： 123456789101112131415161718192021222324252627vue-cli-service build --mode dev/node_modules/_open@6.4.0@open/index.js:16const wslToWindowsPath = async path =&amp;gt">
+<meta property="og:description" content="创建多个git账号&amp;amp;修改git提交历史因公司使用gitlab，账号为公司邮箱，自己也有个GitHub，账号为私人邮箱，要怎么做才能使用不同的账号push不同的仓库呢？ 生成不同的ssh key: 1ssh-keygen -t rsa -f ~/.ssh/id_rsa_github -C &amp;quot;email@email.com&amp;quot; 我把公司的命名为id_rsa，github的加了">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-31T04:51:05.828Z">
+<meta property="og:updated_time" content="2019-08-12T01:57:15.870Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="QA-node-version">
-<meta name="twitter:description" content="Vue cli build 遇到的问题使用vue-cli 3打包时，出现了问题： 123456789101112131415161718192021222324252627vue-cli-service build --mode dev/node_modules/_open@6.4.0@open/index.js:16const wslToWindowsPath = async path =&amp;gt">
+<meta name="twitter:title" content="multi-git-account">
+<meta name="twitter:description" content="创建多个git账号&amp;amp;修改git提交历史因公司使用gitlab，账号为公司邮箱，自己也有个GitHub，账号为私人邮箱，要怎么做才能使用不同的账号push不同的仓库呢？ 生成不同的ssh key: 1ssh-keygen -t rsa -f ~/.ssh/id_rsa_github -C &amp;quot;email@email.com&amp;quot; 我把公司的命名为id_rsa，github的加了">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://ihgsherrylee.github.io/posts/44e1c702/">
+  <link rel="canonical" href="http://ihgsherrylee.github.io/posts/8d0071d2/">
 
 
 
 
 
-  <title>QA-node-version | Sherry's blog</title>
+  <title>multi-git-account | Sherry's blog</title>
   
 
 
@@ -253,7 +253,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://ihgsherrylee.github.io/posts/44e1c702/">
+    <link itemprop="mainEntityOfPage" href="http://ihgsherrylee.github.io/posts/8d0071d2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Sherry Lee">
@@ -270,7 +270,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">QA-node-version</h2>
+          <h2 class="post-title" itemprop="name headline">multi-git-account</h2>
         
 
         <div class="post-meta">
@@ -282,8 +282,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-31T11:53:04+08:00">
-                2019-07-31
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-09T10:50:43+08:00">
+                2019-08-09
               </time>
             
 
@@ -305,8 +305,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/汇总/" itemprop="url" rel="index">
-                    <span itemprop="name">汇总</span>
+                  <a href="/categories/git/" itemprop="url" rel="index">
+                    <span itemprop="name">git</span>
                   </a>
                 </span>
 
@@ -342,15 +342,23 @@
       
 
       
-        <h3 id="Vue-cli-build-遇到的问题"><a href="#Vue-cli-build-遇到的问题" class="headerlink" title="Vue cli build 遇到的问题"></a>Vue cli build 遇到的问题</h3><p>使用vue-cli 3打包时，出现了问题：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">vue-cli-service build --mode dev</span><br><span class="line"></span><br><span class="line">/node_modules/_open@6.4.0@open/index.js:16</span><br><span class="line">const wslToWindowsPath = async path =&gt; &#123;</span><br><span class="line">                               ^^^^</span><br><span class="line"></span><br><span class="line">SyntaxError: Unexpected identifier</span><br><span class="line">    at createScript (vm.js:56:10)</span><br><span class="line">    at Object.runInThisContext (vm.js:97:10)</span><br><span class="line">    at Module._compile (module.js:549:28)</span><br><span class="line">    at Object.Module._extensions..js (module.js:586:10)</span><br><span class="line">    at Module.load (module.js:494:32)</span><br><span class="line">    at tryModuleLoad (module.js:453:12)</span><br><span class="line">    at Function.Module._load (module.js:445:3)</span><br><span class="line">    at Module.require (module.js:504:17)</span><br><span class="line">    at require (internal/module.js:20:19)</span><br><span class="line">    at Object.&lt;anonymous&gt; (/root/.jenkins/workspace/dev-privatization-web-edap/node_modules/_@vue_cli-shared-utils@3.9.0@@vue/cli-shared-utils/lib/openBrowser.js:9:14)</span><br><span class="line">npm ERR! code ELIFECYCLE</span><br><span class="line">npm ERR! errno 1</span><br><span class="line">npm ERR! privatization-information-search@0.1.0 build:dev: `vue-cli-service build --mode dev`</span><br><span class="line">npm ERR! Exit status 1</span><br><span class="line">npm ERR! </span><br><span class="line">npm ERR! Failed at the privatization-information-search@0.1.0 build:dev script.</span><br><span class="line">npm ERR! This is probably not a problem with npm. There is likely additional logging output above.</span><br><span class="line"></span><br><span class="line">npm ERR! A complete log of this run can be found in:</span><br><span class="line">npm ERR!     /root/.npm/_logs/2019-07-31T03_09_18_026Z-debug.log</span><br></pre></td></tr></table></figure>
-<p>可是在本地打包时却没有发现这个问题，在运维脚本打包的服务器上却出现了，然后在github的某个库的issue上找到了<a href="https://github.com/tapio/live-server/issues/305" target="_blank" rel="noopener">答案</a>：</p>
-<blockquote>
-<p>Nice write up <a href="https://github.com/pm-radu" target="_blank" rel="noopener">@pm-radu</a>, also seeing this issue here.</p>
-<p>It appears the two options for resolving it are to modify the project’s <code>package.json</code> on <a href="https://github.com/tapio/live-server/blob/01cd7f970439d42537bbe13b4885befb816a0446/package.json#L48" target="_blank" rel="noopener">line 48</a> to specify a version of Node.js greater than 7.6 when support was added for <code>async/await</code>. Additionally the dependency <code>opn</code> is now called <a href="https://www.npmjs.com/package/open" target="_blank" rel="noopener"><code>open</code></a> and should be updated.</p>
-<p>Alternately if maintaining support for the oldest versions of Node is a priority, <a href="https://github.com/tapio/live-server/blob/01cd7f970439d42537bbe13b4885befb816a0446/package.json#L24" target="_blank" rel="noopener">line 24</a> could be modified to specify the last <code>opn</code> version without <code>async/await</code> which is 5.4.0.</p>
-</blockquote>
-<p>服务器node版本是6,而async/await语法需node &gt; 7.6，所以报错了。</p>
+        <h4 id="创建多个git账号-amp-修改git提交历史"><a href="#创建多个git账号-amp-修改git提交历史" class="headerlink" title="创建多个git账号&amp;修改git提交历史"></a>创建多个git账号&amp;修改git提交历史</h4><p>因公司使用gitlab，账号为公司邮箱，自己也有个GitHub，账号为私人邮箱，要怎么做才能使用不同的账号push不同的仓库呢？</p>
+<p>生成不同的ssh key:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -f ~/.ssh/id_rsa_github -C &quot;email@email.com&quot;</span><br></pre></td></tr></table></figure>
+<p>我把公司的命名为id_rsa，github的加了个后缀，然后将key复制到网站上。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi id_rsa_github.pub</span><br></pre></td></tr></table></figure>
+<p>相信之前肯定设置了global的email和name，网上大部分说法都是讲global的设置删除，但也可以不删，只是在相对应的gitlab仓库下设置gitlab账号就好（我是global使用github账号，因为公司项目较少，需设置的仓库较少）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// 全局</span><br><span class="line">git config --global user.email githubEmail</span><br><span class="line">git config --global user.name ihgSherryLee</span><br><span class="line"></span><br><span class="line">//gitlab项目</span><br><span class="line">git config user.email gitlabEmail</span><br><span class="line">git config user.name gitlabName</span><br></pre></td></tr></table></figure>
+<p>一旦使用其他账号commit/push过，想要修改git的提交记录（因为github的contribution不好看），可以用脚本来做：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">git filter-branch --env-filter &apos;</span><br><span class="line"></span><br><span class="line">OLD_EMAIL=&quot;oldEmail@email.com&quot;</span><br><span class="line">CORRECT_NAME=&quot;name&quot;</span><br><span class="line">CORRECT_EMAIL=&quot;email&quot;</span><br><span class="line"></span><br><span class="line">if [ &quot;$GIT_COMMITTER_EMAIL&quot; = &quot;$OLD_EMAIL&quot; ]</span><br><span class="line">then</span><br><span class="line">    export GIT_COMMITTER_NAME=&quot;$CORRECT_NAME&quot;</span><br><span class="line">    export GIT_COMMITTER_EMAIL=&quot;$CORRECT_EMAIL&quot;</span><br><span class="line">fi</span><br><span class="line">if [ &quot;$GIT_AUTHOR_EMAIL&quot; = &quot;$OLD_EMAIL&quot; ]</span><br><span class="line">then</span><br><span class="line">    export GIT_AUTHOR_NAME=&quot;$CORRECT_NAME&quot;</span><br><span class="line">    export GIT_AUTHOR_EMAIL=&quot;$CORRECT_EMAIL&quot;</span><br><span class="line">fi</span><br><span class="line">&apos; --tag-name-filter cat -- --branches --tags</span><br></pre></td></tr></table></figure>
+<p>存储为项目根目录下email.sh(第一次覆盖更新时)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chmod +x email.sh </span><br><span class="line">./email.sh</span><br></pre></td></tr></table></figure>
+<p>若要在同一个项目再覆盖一次，执行后回提示</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Cannot create a new backup.</span><br><span class="line">A previous backup already exists in refs/original/</span><br><span class="line">Force overwriting the backup with -f</span><br></pre></td></tr></table></figure>
+<p>要把refs/original/删掉：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">rm -rf .git/refs/original/</span><br><span class="line">或</span><br><span class="line">git filter-branch -f --index-filter &apos;git rm --cached --ignore-unmatch Rakefile&apos; HEAD</span><br><span class="line"></span><br><span class="line">./email.sh</span><br></pre></td></tr></table></figure>
+<p>这样就能修改成功，然后push</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git push origin --force --all</span><br><span class="line">git push origin --force --tags</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -368,9 +376,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/问题/" rel="tag"># 问题</a>
+            <a href="/tags/git-多账号/" rel="tag"># git 多账号</a>
           
-            <a href="/tags/总结/" rel="tag"># 总结</a>
+            <a href="/tags/git-提交历史/" rel="tag"># git 提交历史</a>
           
         </div>
       
@@ -383,8 +391,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/posts/52251865/" rel="next" title="vue-unite-test">
-                <i class="fa fa-chevron-left"></i> vue-unite-test
+              <a href="/posts/44e1c702/" rel="next" title="QA-node-version">
+                <i class="fa fa-chevron-left"></i> QA-node-version
               </a>
             
           </div>
@@ -392,10 +400,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/posts/8d0071d2/" rel="prev" title="multi-git-account">
-                multi-git-account <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -527,7 +531,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Vue-cli-build-遇到的问题"><span class="nav-number">1.</span> <span class="nav-text">Vue cli build 遇到的问题</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#创建多个git账号-amp-修改git提交历史"><span class="nav-number">1.</span> <span class="nav-text">创建多个git账号&amp;修改git提交历史</span></a></li></ol></div>
             
 
           </div>

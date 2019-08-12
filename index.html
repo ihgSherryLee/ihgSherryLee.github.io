@@ -252,6 +252,164 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://ihgsherrylee.github.io/posts/8d0071d2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Sherry Lee">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sherry's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/posts/8d0071d2/" itemprop="url">multi-git-account</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-09T10:50:43+08:00">
+                2019-08-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/git/" itemprop="url" rel="index">
+                    <span itemprop="name">git</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="创建多个git账号-amp-修改git提交历史"><a href="#创建多个git账号-amp-修改git提交历史" class="headerlink" title="创建多个git账号&amp;修改git提交历史"></a>创建多个git账号&amp;修改git提交历史</h4><p>因公司使用gitlab，账号为公司邮箱，自己也有个GitHub，账号为私人邮箱，要怎么做才能使用不同的账号push不同的仓库呢？</p>
+<p>生成不同的ssh key:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -f ~/.ssh/id_rsa_github -C &quot;email@email.com&quot;</span><br></pre></td></tr></table></figure>
+<p>我把公司的命名为id_rsa，github的加了个后缀，然后将key复制到网站上。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi id_rsa_github.pub</span><br></pre></td></tr></table></figure>
+<p>相信之前肯定设置了global的email和name，网上大部分说法都是讲global的设置删除，但也可以不删，只是在相对应的gitlab仓库下设置gitlab账号就好（我是global使用github账号，因为公司项目较少，需设置的仓库较少）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// 全局</span><br><span class="line">git config --global user.email githubEmail</span><br><span class="line">git config --global user.name ihgSherryLee</span><br><span class="line"></span><br><span class="line">//gitlab项目</span><br><span class="line">git config user.email gitlabEmail</span><br><span class="line">git config user.name gitlabName</span><br></pre></td></tr></table></figure>
+<p>一旦使用其他账号commit/push过，想要修改git的提交记录（因为github的contribution不好看），可以用脚本来做：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">git filter-branch --env-filter &apos;</span><br><span class="line"></span><br><span class="line">OLD_EMAIL=&quot;oldEmail@email.com&quot;</span><br><span class="line">CORRECT_NAME=&quot;name&quot;</span><br><span class="line">CORRECT_EMAIL=&quot;email&quot;</span><br><span class="line"></span><br><span class="line">if [ &quot;$GIT_COMMITTER_EMAIL&quot; = &quot;$OLD_EMAIL&quot; ]</span><br><span class="line">then</span><br><span class="line">    export GIT_COMMITTER_NAME=&quot;$CORRECT_NAME&quot;</span><br><span class="line">    export GIT_COMMITTER_EMAIL=&quot;$CORRECT_EMAIL&quot;</span><br><span class="line">fi</span><br><span class="line">if [ &quot;$GIT_AUTHOR_EMAIL&quot; = &quot;$OLD_EMAIL&quot; ]</span><br><span class="line">then</span><br><span class="line">    export GIT_AUTHOR_NAME=&quot;$CORRECT_NAME&quot;</span><br><span class="line">    export GIT_AUTHOR_EMAIL=&quot;$CORRECT_EMAIL&quot;</span><br><span class="line">fi</span><br><span class="line">&apos; --tag-name-filter cat -- --branches --tags</span><br></pre></td></tr></table></figure>
+<p>存储为项目根目录下email.sh(第一次覆盖更新时)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chmod +x email.sh </span><br><span class="line">./email.sh</span><br></pre></td></tr></table></figure>
+<p>若要在同一个项目再覆盖一次，执行后回提示</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Cannot create a new backup.</span><br><span class="line">A previous backup already exists in refs/original/</span><br><span class="line">Force overwriting the backup with -f</span><br></pre></td></tr></table></figure>
+<p>要把refs/original/删掉：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">rm -rf .git/refs/original/</span><br><span class="line">或</span><br><span class="line">git filter-branch -f --index-filter &apos;git rm --cached --ignore-unmatch Rakefile&apos; HEAD</span><br><span class="line"></span><br><span class="line">./email.sh</span><br></pre></td></tr></table></figure>
+<p>这样就能修改成功，然后push</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git push origin --force --all</span><br><span class="line">git push origin --force --tags</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://ihgsherrylee.github.io/posts/44e1c702/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1616,181 +1774,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://ihgsherrylee.github.io/posts/4d2accbc/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Sherry Lee">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sherry's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/posts/4d2accbc/" itemprop="url">electron踩坑(一)</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-14T20:40:03+08:00">
-                2019-02-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/electron/" itemprop="url" rel="index">
-                    <span itemprop="name">electron</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>公司项目使用electron开发，</p>
-<blockquote>
-<p><a href="https://electronjs.org/" target="_blank" rel="noopener">Electron</a>是由Github开发，用HTML，CSS和JavaScript来构建跨平台桌面应用程序的一个开源库。 Electron通过将<a href="https://www.chromium.org/Home" target="_blank" rel="noopener">Chromium</a>和<a href="https://nodejs.org/" target="_blank" rel="noopener">Node.js</a>合并到同一个运行时环境中，并将其打包为Mac，Windows和Linux系统下的应用。</p>
-</blockquote>
-<p>使用electron将公司网站打包成应用，伪装成专业的bs客户端。</p>
-<p>安装和入门在<a href="https://github.com/electron/electron" target="_blank" rel="noopener">GitHub</a>上都有</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/electron/electron-quick-start</span><br><span class="line">cd electron-quick-start</span><br><span class="line">npm install</span><br><span class="line">npm start</span><br></pre></td></tr></table></figure>
-<p>clone之后修修改改就形成了现在的项目。</p>
-<h4 id="使用electron-builder打包成应用程序exe-dmg"><a href="#使用electron-builder打包成应用程序exe-dmg" class="headerlink" title="使用electron-builder打包成应用程序exe/dmg"></a>使用electron-builder打包成应用程序exe/dmg</h4><p>下载yarn</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn add electron-builder --dev</span><br></pre></td></tr></table></figure>
-<p>修改package.json，设置appId，使windows</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&quot;build&quot;: &#123;</span><br><span class="line">  &quot;appId&quot;: &quot;your.id&quot;,</span><br><span class="line">  &quot;mac&quot;: &#123;</span><br><span class="line">    &quot;category&quot;: &quot;your.app.category.type&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&quot;scripts&quot;: &#123;</span><br><span class="line">  &quot;pack&quot;: &quot;electron-builder --dir&quot;,</span><br><span class="line">  &quot;dist&quot;: &quot;electron-builder&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>然后打包就会在dist目录生成.exe(在windows打包)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn dist</span><br></pre></td></tr></table></figure>
-<p>具体的dist 参数可以参考 <a href="https://www.electron.build/cli" target="_blank" rel="noopener">https://www.electron.build/cli</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">electron-builder // 不指定平台和位数，默认会打当前打包程序所在平台的相应位数版本</span><br><span class="line">electron-builder --win --ia32 --x64 // 指定平台和位数，将32位和64位打成同一个安装包</span><br></pre></td></tr></table></figure>
-<p>若要分开打成两个包，需分别执行–ia和x64两次得到2个包:<a href="https://github.com/electron-userland/electron-builder/issues/3293" target="_blank" rel="noopener">Issue</a>，但因为两个安装包生成同一名字的latest.yml，会被覆盖，自动更新会替换后生成的安装包，不然就要将两个安装包和latest.yml放在不同文件夹下，保证自动更新正常。</p>
-<p>注!!!</p>
-<p>不要指望一个平台能打包全平台的安装包。</p>
-<blockquote>
-<p>Don’t expect that you can build app for all platforms on one platform.</p>
-<ul>
-<li><p>If your app has native dependency, it can be compiled only on the target platform unless <a href="https://www.npmjs.com/package/prebuild" target="_blank" rel="noopener">prebuild</a> is not used.</p>
-<p><a href="https://www.npmjs.com/package/prebuild" target="_blank" rel="noopener">prebuild</a> is a solution, but most node modules <a href="https://github.com/atom/node-keytar/issues/27" target="_blank" rel="noopener">don’t provide</a> prebuilt binaries.</p>
-</li>
-<li><p>macOS Code Signing works only on macOS. <a href="http://stackoverflow.com/a/12156576" target="_blank" rel="noopener">Cannot be fixed</a>.</p>
-</li>
-</ul>
-</blockquote>
-<p>注：</p>
-<ul>
-<li>Win 10 notification bug：这个项目一开始并不是打包成安装包后安装成桌面应用，而是打包成asar归档规格式，但因为后来网页需要使用通知notification，发现在win10的某一个版本16299.19里无法显示通知，但是有通知的声音播放，查阅相关文档后发现，这是win10的feature，必须使用有appId的安装包安装后才能显示通知(相关<a href="https://github.com/electron/electron/issues/10864" target="_blank" rel="noopener">issue</a>)。所以使用<a href="https://github.com/electron-userland/electron-builder" target="_blank" rel="noopener">electron-builder</a>打包成安装包.</li>
-<li>win 7 notification bug：在win7电脑上使用通知，若通知tag相同，则只会弹第一次，即使刷新了页面，也不好弹第二次，只有关闭应用程序后重开才会再次弹窗。<a href="https://github.com/electron/electron/issues/11189" target="_blank" rel="noopener">issue</a>。所有要将tag加个random，避免相同。</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1841,7 +1824,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1852,7 +1835,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -1863,7 +1846,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-count">19</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
