@@ -252,6 +252,164 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://ihgsherrylee.github.io/posts/8cabe836/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Sherry Lee">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sherry's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/posts/8cabe836/" itemprop="url">vue-storybook-1</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-13T17:30:50+08:00">
+                2019-08-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/vue/" itemprop="url" rel="index">
+                    <span itemprop="name">vue</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="在vue项目中引入storybook"><a href="#在vue项目中引入storybook" class="headerlink" title="在vue项目中引入storybook"></a>在vue项目中引入storybook</h1><p>之前使用了vue-cli生成项目，并且选择了typescript，那么，要怎么引入<a href="https://storybook.js.org/docs/guides/guide-vue/" target="_blank" rel="noopener">storybook</a>呢？</p>
+<h4 id="手动安装storybook"><a href="#手动安装storybook" class="headerlink" title="手动安装storybook"></a>手动安装storybook</h4><p>官网上有storybook的cli，但因为我已经存在一个vue项目，所有使用手动安装：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install @storybook/vue --save-dev</span><br></pre></td></tr></table></figure>
+<p>然后还需要一些loader,因为我们用是ts,而且有一些loader在vue项目生成时已经安装，所有只需安装没有的部分（可以在使用下一步命令启动storybook后看漏了什么loader）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i babel-preset-vue awesome-typescript-loader -D</span><br></pre></td></tr></table></figure>
+<h4 id="npm-script"><a href="#npm-script" class="headerlink" title="npm script"></a>npm script</h4><p>在package.json中添加npm命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&quot;scripts&quot;: &#123;</span><br><span class="line">  &quot;storybook&quot;: &quot;start-storybook&quot;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<h4 id="添加config-file"><a href="#添加config-file" class="headerlink" title="添加config file"></a>添加config file</h4><p>在项目根目录添加文件.storybook/config.js</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; configure &#125; <span class="keyword">from</span> <span class="string">'@storybook/vue'</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">loadStories</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">require</span>(<span class="string">'../src/stories/index.ts'</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">configure(loadStories, <span class="built_in">module</span>)</span><br></pre></td></tr></table></figure>
+<p>除此之外，还必须添加webpack.config.js，<a href="https://github.com/storybookjs/storybook/issues/5294" target="_blank" rel="noopener">参考</a>，来处理对ts的转化，不然像.vue里的@Component等，都会报Unexpected character ‘@’</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> vueConfig = <span class="built_in">require</span>(<span class="string">'@vue/cli-service/webpack.config.js'</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = <span class="keyword">async</span> (&#123; config &#125;) =&gt; &#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    ...config,</span><br><span class="line">    resolve: &#123;</span><br><span class="line">      ...vueConfig.resolve,</span><br><span class="line">      alias: &#123;</span><br><span class="line">        ...vueConfig.resolve.alias,</span><br><span class="line">        <span class="string">'vue$'</span>: <span class="string">'vue/dist/vue.esm.js'</span> <span class="comment">// if you need it</span></span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="built_in">module</span>: &#123;</span><br><span class="line">      ...vueConfig.module,</span><br><span class="line">      rules: vueConfig.module.rules,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="编写stories"><a href="#编写stories" class="headerlink" title="编写stories"></a>编写stories</h4><p>在src文件夹下新建/stories/index.ts（根目录也可以）</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; storiesOf &#125; <span class="keyword">from</span> <span class="string">'@storybook/vue'</span>;</span><br><span class="line"><span class="keyword">import</span> MyButton <span class="keyword">from</span> <span class="string">'../components/MyButton.vue'</span>;</span><br><span class="line"></span><br><span class="line">storiesOf(<span class="string">'Button'</span>, <span class="keyword">module</span>)</span><br><span class="line">  .add('with text', () =&gt; '&lt;my-button&gt;with text&lt;/my-button&gt;')</span><br><span class="line">  .add('with emoji', () =&gt; '&lt;my-button&gt;😀 😎 👍 💯&lt;/my-button&gt;')</span><br><span class="line">  .add('as a component', () =&gt; (&#123;</span><br><span class="line">    components: &#123; MyButton &#125;,</span><br><span class="line">    template: <span class="string">'&lt;my-button :rounded="true"&gt;rounded&lt;/my-button&gt;'</span>,</span><br><span class="line">  &#125;));</span><br></pre></td></tr></table></figure>
+<p>MyButton组件就自己随便写写就好。</p>
+<p>然后发现tslint有提示@storybook/vue没有定义的声明types，所以要安装</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install @types/storybook__vue -D</span><br></pre></td></tr></table></figure>
+<p>这样storybook就能跑起来了。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://ihgsherrylee.github.io/posts/8d0071d2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1591,189 +1749,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://ihgsherrylee.github.io/posts/e21b57de/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Sherry Lee">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sherry's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/posts/e21b57de/" itemprop="url">electron踩坑(二)</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-22T16:20:16+08:00">
-                2019-02-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/electron/" itemprop="url" rel="index">
-                    <span itemprop="name">electron</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>在后续维护electron项目中想到：每次客户端有更新(即使改动不大),都要重新打包后把客户端发给供应商用户，虽随着用户越来越多，更新也越来越麻烦，花在沟通上的成本更大，所以考虑使用自动更新，减少沟通成本，让用户在没有察觉的情况下就能更新到最新版。</p>
-<blockquote>
-<p>官方支持的方法是利用内置的<a href="https://github.com/Squirrel" target="_blank" rel="noopener">Squirrel</a>框架和Electron的<a href="https://electronjs.org/docs/api/auto-updater" target="_blank" rel="noopener">autoUpdater</a>模块。</p>
-</blockquote>
-<p>但因为之前适用electron-builder工具打包，且，其自带有更新功能，所以还是使用electron-builder的自动更新。</p>
-<p>1、引入自动更新插件，在主进程中使用</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123; autoUpdater &#125; = <span class="built_in">require</span>(<span class="string">'electron-updater'</span>)</span><br><span class="line"></span><br><span class="line">autoUpdater.checkForUpdates()</span><br></pre></td></tr></table></figure>
-<p>这将使用electron-updater的默认配置，自动下载并弹出提醒，但提示语固定且为英语，所以在查看了AppUpdater.js后，修改了更新的回调。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">autoUpdater.checkForUpdates().then(<span class="function"><span class="params">it</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> downloadPromise = it.downloadPromise</span><br><span class="line">    <span class="keyword">if</span> (downloadPromise == <span class="literal">null</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    downloadPromise.then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">new</span> Notification(&#123;</span><br><span class="line">        title: <span class="string">'新版本提醒'</span>,</span><br><span class="line">        body: <span class="string">`<span class="subst">$&#123;autoUpdater.app.name&#125;</span> '新版本' <span class="subst">$&#123;</span></span></span><br><span class="line"><span class="string"><span class="subst">          it.updateInfo.version</span></span></span><br><span class="line"><span class="string"><span class="subst">        &#125;</span> '将会在系统关闭后自动更新'`</span>,</span><br><span class="line">      &#125;).show()</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;)</span><br></pre></td></tr></table></figure>
-<p>checkForUpdates是electron-updater的内置方法，是一个promise，可以在成功回调里做特殊处理。参考checkForUpdatesAndNotify方法，在downloadPromise完成后弹窗提示：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// AppUpdater.js</span></span><br><span class="line">  checkForUpdatesAndNotify() &#123;</span><br><span class="line">    <span class="keyword">if</span> (_electronIsDev().default) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="built_in">Promise</span>.resolve(<span class="literal">null</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> checkForUpdatesPromise = <span class="keyword">this</span>.checkForUpdates();</span><br><span class="line">    checkForUpdatesPromise.then(<span class="function"><span class="params">it</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">const</span> downloadPromise = it.downloadPromise;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span> (downloadPromise == <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">const</span> debug = <span class="keyword">this</span>._logger.debug;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (debug != <span class="literal">null</span>) &#123;</span><br><span class="line">          debug(<span class="string">"checkForUpdatesAndNotify called, downloadPromise is null"</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      downloadPromise.then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">new</span> (_electron().Notification)(&#123;</span><br><span class="line">          title: <span class="string">"A new update is ready to install"</span>,</span><br><span class="line">          body: <span class="string">`<span class="subst">$&#123;<span class="keyword">this</span>.app.getName()&#125;</span> version <span class="subst">$&#123;it.updateInfo.version&#125;</span> has been downloaded and will be automatically installed on exit`</span></span><br><span class="line">        &#125;).show();</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">return</span> checkForUpdatesPromise;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-<p>如果需要更多定制，可以使用以下事件：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">autoUpdater.on(<span class="string">'error'</span>, (ev, err) =&gt; &#123;</span><br><span class="line">  <span class="comment">// 更新出错，其中一步错误都会emit</span></span><br><span class="line">&#125;)</span><br><span class="line">autoUpdater.on(<span class="string">'checking-for-update'</span>, () =&gt; &#123;</span><br><span class="line">  </span><br><span class="line">&#125;)</span><br><span class="line">autoUpdater.on(<span class="string">'update-available'</span>, (ev, info) =&gt; &#123;</span><br><span class="line"></span><br><span class="line">&#125;)</span><br><span class="line">autoUpdater.on(<span class="string">'update-not-available'</span>, (ev, info) =&gt; &#123;</span><br><span class="line">  </span><br><span class="line">&#125;)</span><br><span class="line">autoUpdater.on(<span class="string">'download-progress'</span>, (ev, progressObj) =&gt; &#123;</span><br><span class="line">  <span class="comment">// sendStatusToWindow('Download progress...')</span></span><br><span class="line">&#125;)</span><br><span class="line">autoUpdater.on(<span class="string">'update-downlo aded'</span>, (ev, info) =&gt; &#123;</span><br><span class="line">  <span class="comment">// sendStatusToWindow('Update downloaded; will install in 5 seconds')</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<p>2、<a href="https://www.electron.build/configuration/publish" target="_blank" rel="noopener">发布方式</a>：</p>
-<blockquote>
-<p>The <a href="https://www.electron.build/configuration/configuration#Configuration-publish" target="_blank" rel="noopener">publish</a> key contains a set of options instructing electron-builder on how it should publish artifacts and build update info files for <a href="https://www.electron.build/auto-update" target="_blank" rel="noopener">auto update</a>.</p>
-<p><code>String | Object | Array&lt;Object | String&gt;</code> where <code>Object</code> it is <a href="https://www.electron.build/configuration/publish#bintrayoptions" target="_blank" rel="noopener">BintrayOptions</a>, <a href="https://www.electron.build/configuration/publish#genericserveroptions" target="_blank" rel="noopener">GenericServerOptions</a>, <a href="https://www.electron.build/configuration/publish#githuboptions" target="_blank" rel="noopener">GitHub</a>, <a href="https://www.electron.build/configuration/publish#s3options" target="_blank" rel="noopener">S3Options</a> or <a href="https://www.electron.build/configuration/publish#spacesoptions" target="_blank" rel="noopener">SpacesOptions</a>. Order is important — first item will be used as a default auto-update server. Can be specified in the <a href="https://www.electron.build/configuration/configuration#configuration" target="_blank" rel="noopener">top-level configuration</a> or any platform- (<a href="https://www.electron.build/configuration/mac" target="_blank" rel="noopener">mac</a>, <a href="https://www.electron.build/configuration/linux" target="_blank" rel="noopener">linux</a>, <a href="https://www.electron.build/configuration/win" target="_blank" rel="noopener">win</a>) or target- (e.g. <a href="https://www.electron.build/configuration/nsis" target="_blank" rel="noopener">nsis</a>) specific configuration.</p>
-<p>If <code>GH_TOKEN</code> is defined — defaults to <code>[{provider: &quot;github&quot;}]</code>.</p>
-<p>If <code>BT_TOKEN</code> is defined and <code>GH_TOKEN</code> is not — defaults to <code>[{provider: &quot;bintray&quot;}]</code></p>
-</blockquote>
-<p>我们使用的是</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">"publish": [</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">"provider"</span>: <span class="string">"generic"</span>,</span><br><span class="line">        <span class="attr">"url"</span>: <span class="string">"http://localhost:8080/installer"</span></span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br></pre></td></tr></table></figure>
-<p>此时，重新打包会生成latest.yml:</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="number">1.0</span><span class="number">.2</span></span><br><span class="line"><span class="attr">files:</span></span><br><span class="line"><span class="attr">  - url:</span> <span class="string">erp</span> <span class="string">Setup</span> <span class="number">1.0</span><span class="number">.2</span><span class="string">.exe</span></span><br><span class="line"><span class="attr">    sha512:</span> <span class="string">b5ck9cBaZKgKAQhJ4hfh6xOtMzqZoWvxbudlK3dBKYh7qImOcgPg19zfwnAoZ1/+3zKFHktDCzBY4pSbptc1Hw==</span></span><br><span class="line"><span class="attr">    size:</span> <span class="number">75291392</span></span><br><span class="line"><span class="attr">path:</span> <span class="string">erp</span> <span class="string">Setup</span> <span class="number">1.0</span><span class="number">.2</span><span class="string">.exe</span></span><br><span class="line"><span class="attr">sha512:</span> <span class="string">b5ck9cBaZKgKAQhJ4hfh6xOtMzqZoWvxbudlK3dBKYh7qImOcgPg19zfwnAoZ1/+3zKFHktDCzBY4pSbptc1Hw==</span></span><br><span class="line"><span class="attr">releaseDate:</span> <span class="string">'2019-02-25T10:26:05.909Z'</span></span><br></pre></td></tr></table></figure>
-<p>这是程序判断有无更新的依据，url(<a href="http://localhost:8080/installer，假设起在本地，也可以换成线上的地址)上存放安装包和latest.yml文件，运行客户端时会访问url的latest.yml查询是否有版本更新。" target="_blank" rel="noopener">http://localhost:8080/installer，假设起在本地，也可以换成线上的地址)上存放安装包和latest.yml文件，运行客户端时会访问url的latest.yml查询是否有版本更新。</a></p>
-<p>遇到的坑：</p>
-<ul>
-<li><p>electron provider url 测试为本地时，漏了个/,导致ERR_INVALID_URL</p>
-</li>
-<li><p>electron provider url 测试为线上时，当时线上安装包地址使用软连接，不是带版本号的文件名，而是直接erp.exe，但在测试自动更新时发现，无论如何更新安装包和latest.yml文件，都没有改变sha512，即使检测到了新版本，可是安装包的地址指向不对，一直是第一次上传的版本，因为这个url使用了cdn缓存，导致软连接一直指向了最开始上传的版本，即使刷新了cdn地址和预加载大文件都不可以，所以最后没有使用软连接，而是直接带上了版本号，这样就能正常更新。</p>
-<p><img src="/Users/sherry/Library/Application Support/typora-user-images/image-20190304164623128.png" alt="image-20190304164623128"></p>
-</li>
-<li><p>在这次更新electron时，需要做到打开多个客户端，在修改代码后测试发现，第一个客户端中能正常获取localStorage，但之后的客户端都无法获取，查看<a href="https://github.com/electron/electron/issues/2493" target="_blank" rel="noopener">issue</a>后发现，这是因为两个浏览器进程使用的是相同路径的数据，一旦文件被一个进程读取(localStorage是以本地文件存储的方式)，即被锁住，其他进程无法读取，除非把这些数据拷贝到另一个路径下。所以electron<a href="https://github.com/electron/electron/issues/12763" target="_blank" rel="noopener">推荐使用单实例窗口</a>，否则可能会出现无法获取到部分数据。</p>
-<blockquote>
-<p>Running multiple instances of Electron is generally a bad idea and <a href="https://github.com/electron/electron/issues/4727" target="_blank" rel="noopener">not really supported</a> with the default configuration. Some renderer features don’t work in this scenario (<a href="https://github.com/electron/electron/issues/2493" target="_blank" rel="noopener">localStorage</a>, <a href="https://github.com/electron/electron/issues/10792" target="_blank" rel="noopener">IndexedDb</a>, persisted sessions?)</p>
-</blockquote>
-<p><a href="https://github.com/electron/electron/issues/2437" target="_blank" rel="noopener">打开一个窗口会创建3个进程</a>，这是由于Chromium的特征导致的：</p>
-<blockquote>
-<p>Yes. When you run Electron it will run 3 processes. That’s because of Chromium’s multi-process architecture</p>
-</blockquote>
-</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1824,7 +1799,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1835,7 +1810,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -1846,7 +1821,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

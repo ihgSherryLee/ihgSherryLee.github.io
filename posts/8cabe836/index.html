@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="vue,单元测试,jest,">
+  <meta name="keywords" content="vue,storybook,">
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="一名前端er的采坑历程">
-<meta name="keywords" content="vue,单元测试,jest">
+<meta name="description" content="在vue项目中引入storybook之前使用了vue-cli生成项目，并且选择了typescript，那么，要怎么引入storybook呢？ 手动安装storybook官网上有storybook的cli，但因为我已经存在一个vue项目，所有使用手动安装： 1npm install @storybook/vue --save-dev 然后还需要一些loader,因为我们用是ts,而且有一些loade">
+<meta name="keywords" content="vue,storybook">
 <meta property="og:type" content="article">
-<meta property="og:title" content="vue-unite-test">
-<meta property="og:url" content="http://ihgsherrylee.github.io/posts/52251865/index.html">
+<meta property="og:title" content="vue-storybook-1">
+<meta property="og:url" content="http://ihgsherrylee.github.io/posts/8cabe836/index.html">
 <meta property="og:site_name" content="Sherry&#39;s blog">
-<meta property="og:description" content="一名前端er的采坑历程">
+<meta property="og:description" content="在vue项目中引入storybook之前使用了vue-cli生成项目，并且选择了typescript，那么，要怎么引入storybook呢？ 手动安装storybook官网上有storybook的cli，但因为我已经存在一个vue项目，所有使用手动安装： 1npm install @storybook/vue --save-dev 然后还需要一些loader,因为我们用是ts,而且有一些loade">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-22T14:35:23.326Z">
+<meta property="og:updated_time" content="2019-08-14T10:20:33.196Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="vue-unite-test">
-<meta name="twitter:description" content="一名前端er的采坑历程">
+<meta name="twitter:title" content="vue-storybook-1">
+<meta name="twitter:description" content="在vue项目中引入storybook之前使用了vue-cli生成项目，并且选择了typescript，那么，要怎么引入storybook呢？ 手动安装storybook官网上有storybook的cli，但因为我已经存在一个vue项目，所有使用手动安装： 1npm install @storybook/vue --save-dev 然后还需要一些loader,因为我们用是ts,而且有一些loade">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://ihgsherrylee.github.io/posts/52251865/">
+  <link rel="canonical" href="http://ihgsherrylee.github.io/posts/8cabe836/">
 
 
 
 
 
-  <title>vue-unite-test | Sherry's blog</title>
+  <title>vue-storybook-1 | Sherry's blog</title>
   
 
 
@@ -253,7 +253,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://ihgsherrylee.github.io/posts/52251865/">
+    <link itemprop="mainEntityOfPage" href="http://ihgsherrylee.github.io/posts/8cabe836/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Sherry Lee">
@@ -270,7 +270,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">vue-unite-test</h2>
+          <h2 class="post-title" itemprop="name headline">vue-storybook-1</h2>
         
 
         <div class="post-meta">
@@ -282,8 +282,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-22T22:33:53+08:00">
-                2019-07-22
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-13T17:30:50+08:00">
+                2019-08-13
               </time>
             
 
@@ -305,8 +305,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/单元测试/" itemprop="url" rel="index">
-                    <span itemprop="name">单元测试</span>
+                  <a href="/categories/vue/" itemprop="url" rel="index">
+                    <span itemprop="name">vue</span>
                   </a>
                 </span>
 
@@ -342,7 +342,24 @@
       
 
       
-        
+        <h1 id="在vue项目中引入storybook"><a href="#在vue项目中引入storybook" class="headerlink" title="在vue项目中引入storybook"></a>在vue项目中引入storybook</h1><p>之前使用了vue-cli生成项目，并且选择了typescript，那么，要怎么引入<a href="https://storybook.js.org/docs/guides/guide-vue/" target="_blank" rel="noopener">storybook</a>呢？</p>
+<h4 id="手动安装storybook"><a href="#手动安装storybook" class="headerlink" title="手动安装storybook"></a>手动安装storybook</h4><p>官网上有storybook的cli，但因为我已经存在一个vue项目，所有使用手动安装：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install @storybook/vue --save-dev</span><br></pre></td></tr></table></figure>
+<p>然后还需要一些loader,因为我们用是ts,而且有一些loader在vue项目生成时已经安装，所有只需安装没有的部分（可以在使用下一步命令启动storybook后看漏了什么loader）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i babel-preset-vue awesome-typescript-loader -D</span><br></pre></td></tr></table></figure>
+<h4 id="npm-script"><a href="#npm-script" class="headerlink" title="npm script"></a>npm script</h4><p>在package.json中添加npm命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&quot;scripts&quot;: &#123;</span><br><span class="line">  &quot;storybook&quot;: &quot;start-storybook&quot;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<h4 id="添加config-file"><a href="#添加config-file" class="headerlink" title="添加config file"></a>添加config file</h4><p>在项目根目录添加文件.storybook/config.js</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; configure &#125; <span class="keyword">from</span> <span class="string">'@storybook/vue'</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">loadStories</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">require</span>(<span class="string">'../src/stories/index.ts'</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">configure(loadStories, <span class="built_in">module</span>)</span><br></pre></td></tr></table></figure>
+<p>除此之外，还必须添加webpack.config.js，<a href="https://github.com/storybookjs/storybook/issues/5294" target="_blank" rel="noopener">参考</a>，来处理对ts的转化，不然像.vue里的@Component等，都会报Unexpected character ‘@’</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> vueConfig = <span class="built_in">require</span>(<span class="string">'@vue/cli-service/webpack.config.js'</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = <span class="keyword">async</span> (&#123; config &#125;) =&gt; &#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    ...config,</span><br><span class="line">    resolve: &#123;</span><br><span class="line">      ...vueConfig.resolve,</span><br><span class="line">      alias: &#123;</span><br><span class="line">        ...vueConfig.resolve.alias,</span><br><span class="line">        <span class="string">'vue$'</span>: <span class="string">'vue/dist/vue.esm.js'</span> <span class="comment">// if you need it</span></span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="built_in">module</span>: &#123;</span><br><span class="line">      ...vueConfig.module,</span><br><span class="line">      rules: vueConfig.module.rules,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="编写stories"><a href="#编写stories" class="headerlink" title="编写stories"></a>编写stories</h4><p>在src文件夹下新建/stories/index.ts（根目录也可以）</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; storiesOf &#125; <span class="keyword">from</span> <span class="string">'@storybook/vue'</span>;</span><br><span class="line"><span class="keyword">import</span> MyButton <span class="keyword">from</span> <span class="string">'../components/MyButton.vue'</span>;</span><br><span class="line"></span><br><span class="line">storiesOf(<span class="string">'Button'</span>, <span class="keyword">module</span>)</span><br><span class="line">  .add('with text', () =&gt; '&lt;my-button&gt;with text&lt;/my-button&gt;')</span><br><span class="line">  .add('with emoji', () =&gt; '&lt;my-button&gt;😀 😎 👍 💯&lt;/my-button&gt;')</span><br><span class="line">  .add('as a component', () =&gt; (&#123;</span><br><span class="line">    components: &#123; MyButton &#125;,</span><br><span class="line">    template: <span class="string">'&lt;my-button :rounded="true"&gt;rounded&lt;/my-button&gt;'</span>,</span><br><span class="line">  &#125;));</span><br></pre></td></tr></table></figure>
+<p>MyButton组件就自己随便写写就好。</p>
+<p>然后发现tslint有提示@storybook/vue没有定义的声明types，所以要安装</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install @types/storybook__vue -D</span><br></pre></td></tr></table></figure>
+<p>这样storybook就能跑起来了。</p>
+
       
     </div>
     
@@ -361,9 +378,7 @@
           
             <a href="/tags/vue/" rel="tag"># vue</a>
           
-            <a href="/tags/单元测试/" rel="tag"># 单元测试</a>
-          
-            <a href="/tags/jest/" rel="tag"># jest</a>
+            <a href="/tags/storybook/" rel="tag"># storybook</a>
           
         </div>
       
@@ -376,8 +391,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/posts/82d92ad4/" rel="next" title="hexo-seo">
-                <i class="fa fa-chevron-left"></i> hexo-seo
+              <a href="/posts/8d0071d2/" rel="next" title="multi-git-account">
+                <i class="fa fa-chevron-left"></i> multi-git-account
               </a>
             
           </div>
@@ -385,10 +400,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/posts/44e1c702/" rel="prev" title="QA-node-version">
-                QA-node-version <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -440,8 +451,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -501,6 +521,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#在vue项目中引入storybook"><span class="nav-number">1.</span> <span class="nav-text">在vue项目中引入storybook</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#手动安装storybook"><span class="nav-number">1.0.0.1.</span> <span class="nav-text">手动安装storybook</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#npm-script"><span class="nav-number">1.0.0.2.</span> <span class="nav-text">npm script</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#添加config-file"><span class="nav-number">1.0.0.3.</span> <span class="nav-text">添加config file</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#编写stories"><span class="nav-number">1.0.0.4.</span> <span class="nav-text">编写stories</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
